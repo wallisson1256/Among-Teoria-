@@ -1,0 +1,229 @@
+
+
+/* Desabilita o zoom em qualquer elemento */
+* {
+    touch-action: none;  
+    -ms-touch-action: none;  
+    user-select: none;
+    -webkit-user-drag: none; 
+}
+
+/* Vídeo de fundo */
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 100vh; 
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+#video-fundo {
+    object-fit: contain;  
+    max-width: 100%;       
+    max-height: 100%;      
+}
+
+/* Estilo do botão "Iniciar" no estilo Among Us */
+.botao-navegacao {
+    padding: 15px 30px;
+    font-size: 18px;
+    background-color: #ff3b30;  /* Cor principal do botão (vermelho do crewmate) */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);  /* Alinha o botão no centro da tela */
+    font-weight: bold;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 180px;  /* Largura do botão */
+    height: 60px;   /* Altura do botão */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);  /* Sombra para dar um efeito de profundidade */
+    z-index: 10;    /* Garante que o botão fique acima do vídeo */
+    transition: none;  /* Remove qualquer transição para evitar movimento */
+}
+
+/* Remover efeitos de hover e active para que o botão não se mova */
+.botao-navegacao:hover,
+.botao-navegacao:active {
+    background-color: #ff3b30;  /* Mantém a mesma cor */
+    transform: translate(-50%, -50%);  /* Garantir que a posição permaneça fixa */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);  /* Sombra fixa */
+}
+
+/* Icone de "crewmate" */
+.crewmate-icon {
+    width: 40px;
+    height: 50px;
+    background-color: #ff3b30;  /* Cor vermelha do crewmate */
+    position: absolute;
+    left: 10px;  /* Coloca o ícone do lado esquerdo */
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 20px 20px 5px 5px;  /* Forma arredondada do corpo do crewmate */
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);  /* Sombra para o corpo do crewmate */
+}
+
+/* Visor do crewmate */
+.crewmate-icon::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 4px;
+    width: 32px;
+    height: 20px;
+    background-color: #fff;  /* Cor do visor */
+    border-radius: 10px;  /* Arredondado, como o visor */
+    box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.5);  /* Sombra interna do visor */
+}
+
+.botao-navegacao:hover {
+    background-color: rgba(69, 160, 73, 0.8);
+}
+
+/* Estilo das seções */
+#primeira-parte, #segunda-parte, #terceira-parte {
+    display: none;  /* Inicia todas como ocultas */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    opacity: 0;
+    transition: opacity 2s ease;
+    position: relative;
+}
+
+/* Imagem de fundo  */
+#primeira-parte, #segunda-parte, #terceira-parte {
+    background-image: url('imagem-fundo.png'); 
+    background-repeat: no-repeat;
+}
+
+/* Estilo da imagem */
+.imagem-objetivos {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* Setinha para avançar */
+.seta-direita {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 2px solid #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+}
+
+.seta-direita::after {
+    content: '→';
+    font-size: 24px;
+    color: white;
+}
+
+/* Efeito de virada de página */
+@keyframes virar-pagina {
+    0% {
+        transform: rotateY(0);
+    }
+    50% {
+        transform: rotateY(90deg);
+        opacity: 0;
+    }
+    100% {
+        transform: rotateY(180deg);
+        opacity: 0;
+    }
+}
+
+.virar-pagina {
+    animation: virar-pagina 0.8s forwards;
+}
+
+/* Animação de transição para deslizar a segunda parte para fora e exibir a terceira */
+@keyframes deslizar-para-esquerda {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+}
+
+@keyframes deslizar-para-direita {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Aplicando a animação de deslizar à segunda parte */
+.transicao-deslizar-para-esquerda {
+    animation: deslizar-para-esquerda 1s forwards;
+}
+
+/* Aplicando a animação de deslizar à terceira parte */
+.transicao-deslizar-para-direita {
+    animation: deslizar-para-direita 1s forwards;
+}
+
+/* Visibilidade e opacidade controladas para as seções */
+#primeira-parte, #segunda-parte, #terceira-parte {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    opacity: 0;
+    transition: opacity 1s ease, visibility 1s ease;
+    position: relative;
+}
+
+/* Seções visíveis ao serem ativadas */
+#primeira-parte.visible, #segunda-parte.visible, #terceira-parte.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Seções ocultas */
+#primeira-parte.hidden, #segunda-parte.hidden, #terceira-parte.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Setinha para avançar */
+.seta-direita:hover {
+    background-color: rgba(0, 17, 110, 0.7);
+}

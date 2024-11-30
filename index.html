@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Among Teoria</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Vídeo de fundo na página inicial -->
+    <div class="video-container" id="video-container">
+        <video autoplay muted loop id="video-fundo">
+            <source src="pagina inicial.mp4" type="video/mp4">
+            <source src="pagina inicial.mp4" type="video/webm">
+            Seu navegador não suporta o formato de vídeo.
+        </video>
+
+<!-- Botão "Iniciar" inspirado no Among Us -->
+<a href="javascript:void(0)" onclick="iniciarManual()">
+    <button class="botao-navegacao">
+        <span class="crewmate-icon"></span> Iniciar
+    </button>
+</a>
+
+</a>
+
+    </div>
+
+    <!-- Primeira Parte do Manual: Somente Imagem -->
+    <section id="primeira-parte">
+        <img src="imagem-principal.png" alt="Imagem de Objetivos" class="imagem-objetivos">
+        <div class="seta-direita" onclick="mostrarProximaImagem()"></div>
+    </section>
+
+    <!-- Segunda Parte do Manual: Nova Imagem -->
+    <section id="segunda-parte" style="display: none;">
+        <img src="continuação.png" alt="Nova Imagem" class="imagem-objetivos">
+        <div class="seta-direita" onclick="mostrarProximaParte()"></div>
+    </section>
+
+    <!-- Terceira Parte do Manual -->
+    <section id="terceira-parte" style="display: none;">
+        <img src="continuaçao 2.png" alt="Imagem de Continuação" class="imagem-objetivos">
+    </section>
+
+    <!-- Código JavaScript -->
+    <script>
+// Função para iniciar o manual
+function iniciarManual() {
+    const videoContainer = document.getElementById('video-container');
+    const primeiraParte = document.getElementById('primeira-parte');
+    
+    // Aplica o fade-out no vídeo
+    videoContainer.style.transition = "opacity 1s ease";  
+    videoContainer.style.opacity = '0';  
+
+    setTimeout(function() {
+        videoContainer.style.display = 'none'; 
+        primeiraParte.style.display = 'flex';  
+        primeiraParte.style.opacity = '0';  
+        primeiraParte.style.transition = "opacity 1s ease";  
+        primeiraParte.style.opacity = '1';  
+    }, 1000);  
+}
+
+// Função para mostrar a próxima imagem
+function mostrarProximaImagem() {
+    const primeiraParte = document.getElementById('primeira-parte');
+    const segundaParte = document.getElementById('segunda-parte');
+    
+    primeiraParte.classList.add('virar-pagina');
+
+    setTimeout(function() {
+        primeiraParte.style.display = 'none';  
+        segundaParte.style.display = 'flex';  
+        segundaParte.style.opacity = '0';  
+        segundaParte.style.transition = "opacity 2s ease";  
+        segundaParte.style.opacity = '1';  
+    }, 1000);  
+}
+
+// Função para mostrar a terceira parte
+function mostrarProximaParte() {
+    const segundaParte = document.getElementById('segunda-parte');
+    const terceiraParte = document.getElementById('terceira-parte');
+    
+    // Adiciona a animação de deslizar para a esquerda à segunda parte
+    segundaParte.classList.add('transicao-deslizar-para-esquerda');
+    
+    // Após o tempo da animação (1 segundo), vamos esconder a 'segunda-parte' e mostrar a 'terceira-parte'
+    setTimeout(function() {
+        segundaParte.style.display = 'none';  // Esconde a segunda parte
+        terceiraParte.style.display = 'flex'; // Exibe a terceira parte
+        terceiraParte.style.opacity = '0';  
+        terceiraParte.style.transition = "opacity 1s ease";  
+        terceiraParte.style.opacity = '1';  
+    }, 1000);  // 1000ms corresponde ao tempo da animação de "deslizar-para-esquerda"
+}
+
+
+        
+    </script>
+
+</body>
+</html>
